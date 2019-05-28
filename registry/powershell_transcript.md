@@ -2,7 +2,7 @@
 
 Adversaries might query HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription to check if PowerShell transcript settings are enabled.
 
-# Adversary Actions
+## Adversary Actions
 
 Query
 

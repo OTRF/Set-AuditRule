@@ -2,7 +2,7 @@
 
 Adversaries might query HKCU:\SOFTWARE\Microsoft\Internet Explorer\TypedURLs for Internet Explorer (All Users) history
 
-# Adversary Actions
+## Adversary Actions
 
 Query
 

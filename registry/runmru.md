@@ -2,7 +2,7 @@
 
 Adversaries might query HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RunMRU to list recently run commands.
 
-# Adversary Actions
+## Adversary Actions
 
 Query
 

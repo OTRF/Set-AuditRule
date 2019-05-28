@@ -2,7 +2,7 @@
 
 Adversaries might query HKLM:\Software\Policies\Microsoft\Windows\EventLog\EventForwarding\SubscriptionManager for WEF settings.
 
-# Adversary Actions
+## Adversary Actions
 
 Query
 

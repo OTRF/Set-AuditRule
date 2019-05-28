@@ -2,7 +2,7 @@
 
 Adversaries might query HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon for Registry Auto-logon Settings.
 
-# Adversary Actions
+## Adversary Actions
 
 Query
 

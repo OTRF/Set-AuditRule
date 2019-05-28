@@ -2,7 +2,7 @@
 
 Adversaries might query HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ModuleLogging for PowerShell Module Logging settings.
 
-# Adversary Actions
+## Adversary Actions
 
 Query
 

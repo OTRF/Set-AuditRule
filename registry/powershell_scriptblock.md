@@ -2,7 +2,7 @@
 
 Adversaries might query HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging to check if PowerShell ScriptBlockLogging settings are enabled.
 
-# Adversary Actions
+## Adversary Actions
 
 Query
 

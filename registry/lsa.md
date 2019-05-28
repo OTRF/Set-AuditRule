@@ -2,7 +2,7 @@
 
 Adversaries might query HKLM:\SYSTEM\CurrentControlSet\Control\Lsa for LSA settings (i.e Security Packages).
 
-# Adversary Actions
+## Adversary Actions
 
 Query
 

@@ -2,7 +2,7 @@
 
 Adversaries might query HKLM:\Software\Policies\Microsoft Services\AdmPwd for LAPS settings.
 
-# Adversary Actions
+## Adversary Actions
 
 Query
 

@@ -11,7 +11,7 @@ Adversaries might query the following queries for autoruns information:
 * "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunService"
 * "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnceService"
 
-# Adversary Actions
+## Adversary Actions
 
 Query
 

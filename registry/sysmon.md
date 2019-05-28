@@ -2,7 +2,7 @@
 
 Adversaries might query for Sysmon configurations.
 
-# Adversary Actions
+## Adversary Actions
 
 Query
 

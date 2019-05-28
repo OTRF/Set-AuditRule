@@ -2,7 +2,7 @@
 
 Adversaries might query HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System\Audit for audit policies settings.
 
-# Adversary Actions
+## Adversary Actions
 
 Query
 

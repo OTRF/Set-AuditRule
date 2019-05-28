@@ -2,7 +2,7 @@
 
 Adversaries might query HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System for UAC system policies
 
-# Adversary Actions
+## Adversary Actions
 
 Query
 

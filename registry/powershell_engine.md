@@ -2,7 +2,7 @@
 
 Adversaries might query HKLM:\SOFTWARE\Microsoft\PowerShell\1\PowerShellEngine and HKLM:\SOFTWARE\Microsoft\PowerShell\3\PowerShellEngine to gather information about the PowerShell versions available in the system.
 
-# Adversary Actions
+## Adversary Actions
 
 Query
 

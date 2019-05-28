@@ -2,7 +2,7 @@
 
 Adversaries might query 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' for current system environment variables
 
-# Adversary Actions
+## Adversary Actions
 
 Query
 
