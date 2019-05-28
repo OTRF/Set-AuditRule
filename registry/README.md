@@ -14,5 +14,5 @@
 | [System Audit](system_audit.md) | QueryValues |
 | [System Policies](system_policies.md) | QueryValues |
 | [Typed URLs](typed_urls.md) | QueryValues |
-| [WEF Subscriptio Manager](wef_subscription_maager.md) | QueryValues |
+| [WEF Subscription Manager](wef_subscription_manager.md) | QueryValues |
 | [Winlogon](winlogon.md) | QueryValues |
