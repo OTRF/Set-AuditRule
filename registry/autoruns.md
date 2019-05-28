@@ -1,0 +1,141 @@
+# Registry Autoruns
+
+Adversaries might query the following queries for autoruns information:
+
+* "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run"
+* "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce"
+* "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run"
+* "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce"
+* "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunService"
+* "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnceService"
+* "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunService"
+* "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnceService"
+
+# Adversary Actions
+
+Query
+
+## Set Audit Rule
+
+```
+$auto = @(
+    "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run",
+    "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce",
+    "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run",
+    "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce",
+    "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunService",
+    "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnceService",
+    "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunService",
+    "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnceService"
+)
+
+foreach ($a in $auto)
+{
+    Set-AuditRule -RegistryPath $a -IdentityReference Everyone -Rights QueryValues -InheritanceFlags None -PropagationFlags None -AuditFlags Success
+}
+```
+
+## Event Occurrence
+
+Low
+
+## Notes
+
+## Object Properties
+
+```
+
+```
+
+## Object Security Descriptor
+
+```
+HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+
+Path   : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+Owner  : NT AUTHORITY\SYSTEM
+Group  : NT AUTHORITY\SYSTEM
+Access : BUILTIN\Users Allow  ReadKey
+         BUILTIN\Users Allow  -2147483648
+         BUILTIN\Administrators Allow  FullControl
+         BUILTIN\Administrators Allow  268435456
+         NT AUTHORITY\SYSTEM Allow  FullControl
+         NT AUTHORITY\SYSTEM Allow  268435456
+         CREATOR OWNER Allow  268435456
+         APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES Allow  ReadKey
+         APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES Allow  -2147483648
+         S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681 Allow  ReadKey
+         S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681 Allow  -2147483648
+Audit  : 
+Sddl   : O:SYG:SYD:AI(A;ID;KR;;;BU)(A;CIIOID;GR;;;BU)(A;ID;KA;;;BA)(A;CIIOID;GA;;;BA)(A;ID;KA;;;SY)(A;CIIOID;GA;;;SY)(A;CIIOID;GA;;;CO)(A;ID;KR;;;AC)(A;CIIOID;GR;;;AC)(A;ID;KR;;;S-1-15-3-1024
+         -1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)(A;CIIOID;GR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-
+         4053264122-3456934681)S:AI
+
+
+HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
+
+Path   : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce
+Owner  : NT AUTHORITY\SYSTEM
+Group  : NT AUTHORITY\SYSTEM
+Access : BUILTIN\Users Allow  ReadKey
+         BUILTIN\Users Allow  -2147483648
+         BUILTIN\Administrators Allow  FullControl
+         BUILTIN\Administrators Allow  268435456
+         NT AUTHORITY\SYSTEM Allow  FullControl
+         NT AUTHORITY\SYSTEM Allow  268435456
+         CREATOR OWNER Allow  268435456
+         APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES Allow  ReadKey
+         APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES Allow  -2147483648
+         S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681 Allow  ReadKey
+         S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681 Allow  -2147483648
+Audit  : 
+Sddl   : O:SYG:SYD:AI(A;ID;KR;;;BU)(A;CIIOID;GR;;;BU)(A;ID;KA;;;BA)(A;CIIOID;GA;;;BA)(A;ID;KA;;;SY)(A;CIIOID;GA;;;SY)(A;CIIOID;GA;;;CO)(A;ID;KR;;;AC)(A;CIIOID;GR;;;AC)(A;ID;KR;;;S-1-15-3-1024
+         -1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)(A;CIIOID;GR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-
+         4053264122-3456934681)S:AI
+
+
+HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run
+
+Path   : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Run
+Owner  : NT AUTHORITY\SYSTEM
+Group  : NT AUTHORITY\SYSTEM
+Access : BUILTIN\Users Allow  ReadKey
+         BUILTIN\Users Allow  -2147483648
+         BUILTIN\Administrators Allow  FullControl
+         BUILTIN\Administrators Allow  268435456
+         NT AUTHORITY\SYSTEM Allow  FullControl
+         NT AUTHORITY\SYSTEM Allow  268435456
+         CREATOR OWNER Allow  268435456
+         APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES Allow  ReadKey
+         APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES Allow  -2147483648
+         S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681 Allow  ReadKey
+         S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681 Allow  -2147483648
+Audit  : 
+Sddl   : O:SYG:SYD:AI(A;ID;KR;;;BU)(A;CIIOID;GR;;;BU)(A;ID;KA;;;BA)(A;CIIOID;GA;;;BA)(A;ID;KA;;;SY)(A;CIIOID;GA;;;SY)(A;CIIOID;GA;;;CO)(A;ID;KR;;;AC)(A;CIIOID;GR;;;AC)(A;ID;KR;;;S-1-15-3-1024
+         -1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)(A;CIIOID;GR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-
+         4053264122-3456934681)S:AI
+
+
+HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce
+
+Path   : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnce
+Owner  : NT AUTHORITY\SYSTEM
+Group  : NT AUTHORITY\SYSTEM
+Access : BUILTIN\Users Allow  ReadKey
+         BUILTIN\Users Allow  -2147483648
+         BUILTIN\Administrators Allow  FullControl
+         BUILTIN\Administrators Allow  268435456
+         NT AUTHORITY\SYSTEM Allow  FullControl
+         NT AUTHORITY\SYSTEM Allow  268435456
+         CREATOR OWNER Allow  268435456
+         APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES Allow  ReadKey
+         APPLICATION PACKAGE AUTHORITY\ALL APPLICATION PACKAGES Allow  -2147483648
+         S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681 Allow  ReadKey
+         S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681 Allow  -2147483648
+Audit  : 
+Sddl   : O:SYG:SYD:AI(A;ID;KR;;;BU)(A;CIIOID;GR;;;BU)(A;ID;KA;;;BA)(A;CIIOID;GA;;;BA)(A;ID;KA;;;SY)(A;CIIOID;GA;;;SY)(A;CIIOID;GA;;;CO)(A;ID;KR;;;AC)(A;CIIOID;GR;;;AC)(A;ID;KR;;;S-1-15-3-1024
+         -1065365936-1281604716-3511738428-1654721687-432734479-3232135806-4053264122-3456934681)(A;CIIOID;GR;;;S-1-15-3-1024-1065365936-1281604716-3511738428-1654721687-432734479-3232135806-
+         4053264122-3456934681)S:AI
+```
+
+## Object Default Events
