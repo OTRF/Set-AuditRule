@@ -4,7 +4,7 @@ Adversaries might query the `Domain Admins` AD object to list its members.
 
 # Adversary Actions
 
-GeenricRead
+GenericRead
 
 ## Set Audit Rule
 
