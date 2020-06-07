@@ -1,0 +1,22 @@
+title: Camera and Microphone Access
+id: D95C09AC-0FFC-4AAB-B210-C2240D50D88A
+status: experimental
+description: Microsoft and Non-Microsoft applications are stored under the following keys that are related to access and use of the endpoint's webcam and microphone
+references:
+    - https://medium.com/@7a616368/can-you-track-processes-accessing-the-camera-and-microphone-7e6885b37072
+    - https://twitter.com/duzvik/status/1269624961532071944
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/06/07
+rule_category: registry
+rule:
+    registry_paths:
+        - 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam'
+        - 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone'
+    identity_reference: Everyone
+    rights:
+        - SetValue
+        - WriteKey
+    inheritance_flags: ContainerInherit
+    propagation_flags: InheritOnly
+    audit_flags:
+        - Success
