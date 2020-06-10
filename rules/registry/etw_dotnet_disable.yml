@@ -1,0 +1,20 @@
+title: ETW .NET Disabled
+id: 10F394A0-8097-4466-BEC1-738740A22018
+status: experimental
+description: Adversaries can disable ETW for .NET by modifying the registry contents of HKCU\Software\Microsoft\.NETFramework or HKLM\Software\Microsoft\.NETFramework.
+references:
+    - https://twitter.com/_xpn_/status/1268712093928378368
+    - https://gist.github.com/Cyb3rWard0g/a4a115fd3ab518a0e593525a379adee3
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/06/05
+rule_category: registry
+rule:
+    registry_paths:
+        - 'HKLM:\Software\Microsoft\.NETFramework'
+    identity_reference: Everyone
+    rights:
+        - WriteKey
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success

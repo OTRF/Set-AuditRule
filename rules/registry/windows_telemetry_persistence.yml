@@ -1,0 +1,20 @@
+title: Windows Telemetry Persistence
+id: 1D4ADCDD-E920-4A8B-B4D3-E7A39362E170
+status: experimental
+description: Adversaries with local admin rights can create a new key under HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\TelemetryController and set a few properties to maintain persistence.
+references:
+    - https://www.trustedsec.com/blog/abusing-windows-telemetry-for-persistence/?utm_content=131234033&utm_medium=social&utm_source=twitter&hss_channel=tw-403811306
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/06/10
+rule_category: registry
+rule:
+    registry_paths:
+        - 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\TelemetryController'
+    identity_reference: Everyone
+    rights:
+        - SetValue
+        - WriteKey
+    inheritance_flags: ContainerInherit
+    propagation_flags: InheritOnly
+    audit_flags:
+        - Success
