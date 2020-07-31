@@ -1,0 +1,18 @@
+title: Default Logon Discovery
+id: 1B9F1166-DF68-40B6-AE44-1597B3E262EA
+status: experimental
+description: Adversaries might query HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon for values in DefaultPassword properties to get information about credentials set up for auto user logon.
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/07/30
+rule_category: registry
+rule:
+    registry_paths:
+        - "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon"
+    identity_reference: Everyone
+    rights:
+        - QueryValues
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success

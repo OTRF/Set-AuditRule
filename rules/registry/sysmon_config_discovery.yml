@@ -1,0 +1,18 @@
+title: Sysmon Config Discovery
+id: 7F923B34-8893-4EEE-BED0-6E9E6DD6454F
+status: experimental
+description: Adversaries might query this registry key to read the current Sysmon configurations
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/07/30
+rule_category: registry
+rule:
+    registry_paths:
+        - "HKLM:\SYSTEM\CurrentControlSet\Services\SysmonDrv\Parameters"
+    identity_reference: Everyone
+    rights:
+        - QueryValues
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success

@@ -1,0 +1,18 @@
+title: LAPS Discovery
+id: 9C254E51-B9F5-404E-8426-0D37BEA50508
+status: experimental
+description: Adversaries might query HKLM:\Software\Policies\Microsoft Services\AdmPwd for LAPS settings.
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/06/05
+rule_category: registry
+rule:
+    registry_paths:
+        - 'HKLM:\Software\Policies\Microsoft Services\AdmPwd'
+    identity_reference: Everyone
+    rights:
+        - QueryValues
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success

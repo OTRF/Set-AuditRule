@@ -1,0 +1,18 @@
+title: Environment Variables Discovery
+id: C07D78A9-2AEA-4E23-9476-BCB6EBFC61CF
+status: experimental
+description: Adversaries might query 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment' for current system environment variables.
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/07/30
+rule_category: registry
+rule:
+    registry_paths:
+        - "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment"
+    identity_reference: Everyone
+    rights:
+        - QueryValues
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success

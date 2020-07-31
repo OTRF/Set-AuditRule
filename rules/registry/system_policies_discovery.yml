@@ -1,0 +1,18 @@
+title: System Discovery
+id: A2DDDD57-2A27-4EBD-B8BA-0570818422FA
+status: experimental
+description: Adversaries might query HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System for UAC system policies
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/07/30
+rule_category: registry
+rule:
+    registry_paths:
+        - "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System"
+    identity_reference: Everyone
+    rights:
+        - QueryValues
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success

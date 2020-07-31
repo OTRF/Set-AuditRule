@@ -1,0 +1,22 @@
+title: PowerShell Module Logging
+id: 12DE4E09-DC47-4020-9120-FF4AB3FBA817
+status: experimental
+description: Adversaries might query HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ModuleLogging for PowerShell Module Logging settings.
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/07/30
+rule_category: registry
+rule:
+    registry_paths:
+        - "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\ModuleLogging"
+    identity_reference: Everyone
+    rights:
+        - QueryValues
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success
+notes:
+    - Registry key not set by default
+    - Very noisy in relation to users using PowerShell. It generates several events when user executes a command via PowerShell console
+    - One could filter out everything from powershell.exe to catch other potential PowerShell hosts.

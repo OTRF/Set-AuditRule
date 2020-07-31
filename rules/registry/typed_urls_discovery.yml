@@ -1,0 +1,18 @@
+title: Typed URLs Discovery
+id: DD5159EC-C231-4ABB-942B-2C81AF84FFEC
+status: experimental
+description: Adversaries might query HKCU:\SOFTWARE\Microsoft\Internet Explorer\TypedURLs for Internet Explorer (All Users) history.
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/07/30
+rule_category: registry
+rule:
+    registry_paths:
+        - "HKCU:\SOFTWARE\Microsoft\Internet Explorer\TypedURLs"
+    identity_reference: Everyone
+    rights:
+        - QueryValues
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success

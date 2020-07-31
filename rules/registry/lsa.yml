@@ -1,0 +1,20 @@
+title: LSA Discovery
+id: 50EEA4FA-332E-472A-B6D2-A750D45FFE83
+status: experimental
+description: Adversaries might query HKLM:\SYSTEM\CurrentControlSet\Control\Lsa for LSA settings (i.e Security Packages).
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/06/05
+rule_category: registry
+rule:
+    registry_paths:
+        - 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa'
+    identity_reference: Everyone
+    rights:
+        - QueryValues
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success
+notes:
+    - Queried a lot by the Local Service account via svchost

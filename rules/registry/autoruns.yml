@@ -1,7 +1,7 @@
 title: Autoruns
-id: D95C09AC-0FFC-4AAB-B210-C2240D50D88A
+id: B23A16AD-500B-4956-A5A1-6C8D4745065C
 status: experimental
-description: 
+description: Adversaries might query the following queries for autoruns information
 references:
 author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
 date: 2020/06/07
@@ -19,6 +19,7 @@ rule:
     identity_reference: Everyone
     rights:
         - QueryValues
+        - SetValue
     inheritance_flags: None
     propagation_flags: None
     audit_flags:

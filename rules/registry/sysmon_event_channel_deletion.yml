@@ -1,0 +1,23 @@
+title: Sysmon Event Channel Deletion
+id: FB2FADF2-5F0E-4289-9F7A-307612FBA304
+status: experimental
+description: 
+references:
+    - https://gist.github.com/Cyb3rWard0g/cf08c38c61f7e46e8404b38201ca01c8
+    - 
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/07/30
+rule_category: registry
+rule:
+    registry_paths:
+        - "HKLM:\System\CurrentControlSet\Control\WMI\Autologger\EventLog-Microsoft-Windows-Sysmon-Operational{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"
+        - "HKLM:\System\CurrentControlSet\Control\WMI\Autologger\EventLog-Microsoft-Windows-Sysmon-Operational"
+        - "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Sysmon/Operational"
+        - "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WINEVT\Publishers{5770385f-c22a-43e0-bf4c-06f5698ffbd9}"
+    identity_reference: Everyone
+    rights:
+        - Delete
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success

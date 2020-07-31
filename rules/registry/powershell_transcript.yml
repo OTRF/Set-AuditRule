@@ -1,0 +1,18 @@
+title: PowerShell Transcript
+id: C4B9F972-5B54-4AC1-A7C6-BD9C7BAF4975
+status: experimental
+description: Adversaries might query HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription to check if PowerShell transcript settings are enabled.
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/07/30
+rule_category: registry
+rule:
+    registry_paths:
+        - "HKLM:\SOFTWARE\Policies\Microsoft\Windows\PowerShell\Transcription"
+    identity_reference: Everyone
+    rights:
+        - QueryValues
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success

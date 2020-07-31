@@ -1,0 +1,18 @@
+title: System Audit Discovery
+id: 7A15BAE6-7668-4A42-B874-7EB58AC3B773
+status: experimental
+description: Adversaries might query HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System\Audit for audit policies settings.
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/07/30
+rule_category: registry
+rule:
+    registry_paths:
+        - "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System\Audit"
+    identity_reference: Everyone
+    rights:
+        - QueryValues
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success

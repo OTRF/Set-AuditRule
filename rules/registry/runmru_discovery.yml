@@ -1,0 +1,18 @@
+title: RunMRU Discovery
+id: 479FED15-3193-44DC-9BC2-33A67E45676F
+status: experimental
+description: Adversaries might query HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RunMRU to list recently run commands.
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/07/30
+rule_category: registry
+rule:
+    registry_paths:
+        - "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\RunMRU"
+    identity_reference: Everyone
+    rights:
+        - QueryValues
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success

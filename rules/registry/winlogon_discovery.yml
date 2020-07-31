@@ -1,0 +1,18 @@
+title: Winlogon Discovery
+id: 405FA577-E2B6-4A97-A9BD-455F150DFD2D
+status: experimental
+description: Adversaries might query HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon for Registry Auto-logon Settings.
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/07/30
+rule_category: registry
+rule:
+    registry_paths:
+        - 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon'
+    identity_reference: Everyone
+    rights:
+        - QueryValues
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success

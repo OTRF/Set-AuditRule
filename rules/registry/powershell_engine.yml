@@ -1,0 +1,23 @@
+title: PowerShell Engine
+id: 5FC315F2-D882-4A09-8CEC-C041AFEDA23C
+status: experimental
+description: Adversaries might query HKLM:\SOFTWARE\Microsoft\PowerShell\1\PowerShellEngine and HKLM:\SOFTWARE\Microsoft\PowerShell\3\PowerShellEngine to gather information about the PowerShell versions available in the system.
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/07/30
+rule_category: registry
+rule:
+    registry_paths:
+        - "HKLM:\SOFTWARE\Microsoft\PowerShell\1"
+        - "HKLM:\SOFTWARE\Microsoft\PowerShell\3"
+    identity_reference: Everyone
+    rights:
+        - QueryValues
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success
+notes:
+    - Audit Rule cannot be applied to HKLM:\SOFTWARE\Microsoft\PowerShell\1\PowerShellEngine directly. Audit rule needs to be applied to HKLM:\SOFTWARE\Microsoft\PowerShell\1\ with `InheritanceFlag` set to `ContainerInherit`
+    - Audit Rule cannot be applied to HKLM:\SOFTWARE\Microsoft\PowerShell\3\PowerShellEngine directly. Audit rule needs to be applied to HKLM:\SOFTWARE\Microsoft\PowerShell\3\ with `InheritanceFlag` set to `ContainerInherit`
+    - In a Windows 10 computer (PS version 5), HKLM:\SOFTWARE\Microsoft\PowerShell\3\PowerShellEngine is queried every time the PowerShell console is opened.
