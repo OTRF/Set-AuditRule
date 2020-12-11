@@ -100,9 +100,11 @@ function Set-AuditRule
 
     .EXAMPLE
 
-    PS > Get-Acl -Path 'AD:\CN=Domain Admins,CN=Users,DC=RIVENDELL,DC=local' -Audit | fl
-    PS > Set-AuditRule -AdObjectPath 'AD:\CN=Domain Admins,CN=Users,DC=RIVENDELL,DC=local' -IdentityReference Everyone -Rights GenericRead -InheritanceFlags None -AuditFlags Success
-    PS > Get-Acl -Path 'AD:\CN=Domain Admins,CN=Users,DC=RIVENDELL,DC=local' -Audit | fl
+    PS > Enter-PSSession MORDORDC -Credential theshire\pgustavo
+    [MORDORDC]: PS > Import-Module activedirectory 
+    [MORDORDC]: PS > Get-Acl -Path 'AD:\CN=Domain Admins,CN=Users,DC=theshire,DC=local' -Audit | fl
+    [MORDORDC]: PS > Set-AuditRule -AdObjectPath 'AD:\CN=Domain Admins,CN=Users,DC=theshire,DC=local' -IdentityReference Everyone -Rights GenericRead -InheritanceFlags None -AuditFlags Success
+    [MORDORDC]: PS > Get-Acl -Path 'AD:\CN=Domain Admins,CN=Users,DC=theshire,DC=local' -Audit | fl
 
     #>
 
@@ -110,16 +112,28 @@ function Set-AuditRule
     param
     (
         [Parameter(Position=0,Mandatory=$true,ParameterSetname='RegistryAudit')]
+        [ValidateScript({Test-Path $_})]
         [string]$RegistryPath,
 
         [Parameter(Position=0,Mandatory=$true,ParameterSetname='FileAudit')]
+        [ValidateScript({Test-Path $_})]
         [string]$FilePath,
         
         [Parameter(Position=0,Mandatory=$true,ParameterSetname='AdObjectAudit')]
         [string]$AdObjectPath,
 
-        [Parameter(Position=1, Mandatory=$true)]
-        [Security.Principal.NTAccount]$IdentityReference
+        [Parameter(Position=1,Mandatory=$true)]
+        [ArgumentCompleter( {
+            param (
+                $CommandName,
+                $ParameterName,
+                $WordToComplete,
+                $CommandAst,
+                $FakeBoundParameters
+            )
+            [System.Security.Principal.WellKnownSidType].DeclaredMembers | Where-object { $_.IsStatic } | Select-Object -ExpandProperty name | Where-object {$_ -like "$wordToComplete*"}
+        })]
+        [String]$WellKnownSidType
     )
     DynamicParam {
         if ($PSCmdlet.ParameterSetName -eq 'AdObjectAudit')
@@ -170,6 +184,16 @@ function Set-AuditRule
             )
         }
 
+        $DomainSidArray = ("AccountAdministratorSid","AccountGuestSid","AccountKrbtgtSid","AccountDomainAdminsSid","AccountDomainUsersSid","AccountDomainGuestsSid","AccountComputersSid","AccountControllersSid","AccountCertAdminsSid","AccountSchemaAdminsSid","AccountEnterpriseAdminsSid","AccountPolicyAdminsSid","AccountRasAndIasServersSid")
+        if ($DomainSidArray.Contains($WellKnownSidType))
+        {
+            $DomainSidOption = @{
+                'Name' = 'DomainSid';
+                'Mandatory' = $true
+            }
+            $ParamOptions = @($DomainSidOption) + $ParamOptions
+        }
+
         $RuntimeParamDic = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
         foreach ($Param in $ParamOptions) {
             $RuntimeParam = New-DynamicParam @Param
@@ -186,6 +210,14 @@ function Set-AuditRule
     {
         try 
         {
+            if ($DomainSid)
+            {
+                $IdentityReference = New-Object System.Security.Principal.SecurityIdentifier([System.Security.Principal.WellKnownSidType]$WellKnownSidType, [System.Security.Principal.SecurityIdentifier]$DomainSid)
+            }
+            else
+            {
+                $IdentityReference = New-Object System.Security.Principal.SecurityIdentifier([System.Security.Principal.WellKnownSidType] $WellKnownSidType,$Null)
+            }
             if ($PSCmdlet.ParameterSetName -eq 'AdObjectAudit')
             {
                 $AuditRuleObject = New-Object System.DirectoryServices.ActiveDirectoryAuditRule($IdentityReference,$Rights,$AuditFlags,[guid]'00000000-0000-0000-0000-000000000000', $InheritanceFlags,[guid]'00000000-0000-0000-0000-000000000000')
@@ -206,8 +238,11 @@ function Set-AuditRule
                 $AuditRuleObject = New-Object $AuditRule($IdentityReference,$Rights,$InheritanceFlags,$PropagationFlags,$AuditFlags)
             }
             $Acl = Get-Acl $Path -Audit
+            Write-Verbose "[+] Old ACL: $($Acl | Format-List | Out-String)"
+            Write-Verbose "[+] Adding ACE to SACL: $($AuditRuleObject | Out-String)"
             $Acl.SetAuditRule($AuditRuleObject)
             Set-Acl $Path $Acl
+            Write-Verbose "[+] New ACL: $($Acl | Format-List | Out-String)"
         } 
         catch 
         {
@@ -223,8 +258,7 @@ function New-DynamicParam {
         [Parameter(Mandatory)]
         [ValidateNotNullOrEmpty()]
         [string]$Name,
-        [ValidateNotNullOrEmpty()]
-        [Parameter(Mandatory)]
+        [Parameter(Mandatory=$false)]
         [array]$ValidateSetOptions,
         [Parameter()]
         [switch]$Mandatory = $false,
@@ -243,11 +277,15 @@ function New-DynamicParam {
     $Collection = new-object System.Collections.ObjectModel.Collection[System.Attribute]
     # Add our custom attribute
     $Collection.Add($Attrib)
-    # Add Validate Set 
-    $ValidateSet= new-object System.Management.Automation.ValidateSetAttribute($Param.ValidateSetOptions)
-    $Collection.Add($ValidateSet)
+    # Add Validate Set
+    if ($ValidateSetOptions)
+    {
+        $ValidateSet= new-object System.Management.Automation.ValidateSetAttribute($Param.ValidateSetOptions)
+        $Collection.Add($ValidateSet)
+    }
+
     # Create Runtime Parameter
-    if ($Param.Name -eq 'Rights')
+    if ($Param.Name -eq 'Rights' -or $Param.Name -eq 'AuditFlags')
     {
         $DynParam = New-Object System.Management.Automation.RuntimeDefinedParameter($Param.Name, [array], $Collection)
     }
