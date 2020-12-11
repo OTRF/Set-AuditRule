@@ -128,17 +128,17 @@ function Set-AuditRule
                 @{
                 'Name' = 'Rights';
                 'Mandatory' = $true;
-                'ValidateSetOptions' = ([System.DirectoryServices.ActiveDirectoryRights]).DeclaredMembers | where { $_.IsStatic } | select -ExpandProperty name
+                'ValidateSetOptions' = ([System.DirectoryServices.ActiveDirectoryRights]).DeclaredMembers | Where-object { $_.IsStatic } | Select-Object -ExpandProperty name
                 },
                 @{
                 'Name' = 'InheritanceFlags';
                 'Mandatory' = $true;
-                'ValidateSetOptions' = ([System.DirectoryServices.ActiveDirectorySecurityInheritance]).DeclaredMembers | where { $_.IsStatic } | select -ExpandProperty name
+                'ValidateSetOptions' = ([System.DirectoryServices.ActiveDirectorySecurityInheritance]).DeclaredMembers | Where-object { $_.IsStatic } | Select-Object -ExpandProperty name
                 },
                 @{
                 'Name' = 'AuditFlags';
                 'Mandatory' = $true;
-                'ValidateSetOptions' = ([System.Security.AccessControl.AuditFlags]).DeclaredMembers | where { $_.IsStatic } | select -ExpandProperty name
+                'ValidateSetOptions' = ([System.Security.AccessControl.AuditFlags]).DeclaredMembers | Where-object { $_.IsStatic } | Select-Object -ExpandProperty name
                 }
             )
         }
@@ -150,22 +150,22 @@ function Set-AuditRule
                 @{
                 'Name' = 'Rights';
                 'Mandatory' = $true;
-                'ValidateSetOptions' = ($AccessRights).DeclaredMembers | where { $_.IsStatic } | select -ExpandProperty name
+                'ValidateSetOptions' = ($AccessRights).DeclaredMembers | Where-object { $_.IsStatic } | Select-Object -ExpandProperty name
                 },
                 @{
                 'Name' = 'InheritanceFlags';
                 'Mandatory' = $true;
-                'ValidateSetOptions' = ([System.Security.AccessControl.InheritanceFlags]).DeclaredMembers | where { $_.IsStatic } | select -ExpandProperty name
+                'ValidateSetOptions' = ([System.Security.AccessControl.InheritanceFlags]).DeclaredMembers | Where-object { $_.IsStatic } | Select-Object -ExpandProperty name
                 },
                 @{
                 'Name' = 'PropagationFlags';
                 'Mandatory' = $true;
-                'ValidateSetOptions' = ([System.Security.AccessControl.PropagationFlags]).DeclaredMembers | where { $_.IsStatic } | select -ExpandProperty name
+                'ValidateSetOptions' = ([System.Security.AccessControl.PropagationFlags]).DeclaredMembers | Where-object { $_.IsStatic } | Select-Object -ExpandProperty name
                 },
                 @{
                 'Name' = 'AuditFlags';
                 'Mandatory' = $true;
-                'ValidateSetOptions' = ([System.Security.AccessControl.AuditFlags]).DeclaredMembers | where { $_.IsStatic } | select -ExpandProperty name
+                'ValidateSetOptions' = ([System.Security.AccessControl.AuditFlags]).DeclaredMembers | Where-object { $_.IsStatic } | Select-Object -ExpandProperty name
                 }
             )
         }
@@ -179,7 +179,7 @@ function Set-AuditRule
     }
 
     begin {
-        $PsBoundParameters.GetEnumerator() | foreach { New-Variable -Name $_.Key -Value $_.Value -ea 'SilentlyContinue'}
+        $PsBoundParameters.GetEnumerator() | ForEach-Object { New-Variable -Name $_.Key -Value $_.Value -ea 'SilentlyContinue'}
     }
 
     process
