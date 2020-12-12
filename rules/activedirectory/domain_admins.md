@@ -11,7 +11,7 @@ GenericRead
 ```
 Example:
 
-Set-AuditRule -AdObjectPath 'AD:\CN=Domain Admins,CN=Users,DC=RIVENDELL,DC=local' -IdentityReference Everyone -Rights GenericRead -InheritanceFlags None -AuditFlags Success
+Set-AuditRule -AdObjectPath 'AD:\CN=Domain Admins,CN=Users,DC=RIVENDELL,DC=local' -WellKnownSidType WorldSid -Rights GenericRead -InheritanceFlags None -AuditFlags Success
 ```
 
 ## Event Occurrence

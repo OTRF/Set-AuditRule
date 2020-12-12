@@ -11,7 +11,7 @@ rule_category: registry
 rule:
     registry_paths:
         - 'HKLM:\Software\Microsoft\.NETFramework'
-    identity_reference: Everyone
+    well_known_sid_type: WorldSid
     rights:
         - WriteKey
     inheritance_flags: None

@@ -10,7 +10,7 @@ rule:
     registry_paths:
         - "HKLM:\SOFTWARE\Microsoft\PowerShell\1"
         - "HKLM:\SOFTWARE\Microsoft\PowerShell\3"
-    identity_reference: Everyone
+    well_known_sid_type: WorldSid
     rights:
         - QueryValues
     inheritance_flags: None

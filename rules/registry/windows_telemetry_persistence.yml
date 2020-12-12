@@ -14,7 +14,7 @@ rule:
     rights:
         - SetValue
         - WriteKey
-    inheritance_flags: ContainerInherit
+    well_known_sid_type: WorldSid
     propagation_flags: InheritOnly
     audit_flags:
         - Success

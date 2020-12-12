@@ -16,7 +16,7 @@ rule:
         - "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnceService"
         - "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunService"
         - "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\RunOnceService"
-    identity_reference: Everyone
+    well_known_sid_type: WorldSid
     rights:
         - QueryValues
         - SetValue

@@ -9,7 +9,7 @@ rule_category: registry
 rule:
     registry_paths:
         - "HKCU:\SOFTWARE\Microsoft\Internet Explorer\TypedURLs"
-    identity_reference: Everyone
+    well_known_sid_type: WorldSid
     rights:
         - QueryValues
     inheritance_flags: None

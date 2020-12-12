@@ -3,7 +3,7 @@ function Set-AuditRule
     <#
     .SYNOPSIS
 
-    Sets an access control entry (ACE) on a system access control list (SACL) of the file, registry or ad object security descriptor.
+    Sets an access control entry (ACE) on a system access control list (SACL) of a file, registry or ad object security descriptor.
 
     .PARAMETER RegistryPath
 
@@ -17,21 +17,36 @@ function Set-AuditRule
 
     Path of the Ad securable object
 
+    .PARAMETER WellKnownSidType
+
+    Commonly used Security Identifier. We leverage the parameter attribute called ArgumentCompleter to add tab completion values.
+    These values are obtained from the System.Security.Principal.WellKnownSidType enum.
+    Examples:
+    - WorldSid -> Indicates a SID that matches everyone.
+    - NetworkSid -> Indicates a SID for a network account. This SID is added to the process of a token when it logs on across a network.
+    - BuiltinAdministratorsSid -> Indicates a SID that matches the administrator account.
+    - AccountDomainAdminsSid -> Indicates a SID that matches the account domain administrator group.
+    - AccountDomainUsersSid -> Indicates a SID that matches the account domain users group.
+
     .PARAMETER Rights
     
-    Specifies the access control rights that can be applied to registry, file or ad objects
+    Specifies the types of access attempts to monitor. Access control rights that can be applied to a registry, file or ad objects.
+    These values are served dynamically from the following Enums: System.Security.AccessControl.RegistryRights, System.Security.AccessControl.FileSystemRights and System.DirectoryServices.ActiveDirectoryRights.
 
     .PARAMETER InheritanceFlag
 
-    Inheritance flags specify the semantics of inheritance for access control entries (ACEs)
+    Inheritance flags specify the semantics of inheritance for access control entries (ACEs).
+    These values are served dynamically from the following Enums: System.DirectoryServices.ActiveDirectorySecurityInheritance and System.Security.AccessControl.InheritanceFlags.
 
     .PARAMETER PropagationFlags
 
-    Specifies how Access Control Entries (ACEs) are propagated to child objects. These flags are significant only if inheritance flags are present
+    Specifies how Access Control Entries (ACEs) are propagated to child objects. These flags are significant only if inheritance flags are present.
+    These values are serverd dynamically from the following Enum: System.Security.AccessControl.PropagationFlags. 
 
     .PARAMETER AuditFlags
 
-    Specifies the conditions for auditing attempts to access a securable object
+    Specifies the conditions for auditing attempts to access a securable object. Success or Failure.
+    These values are served dynamically from the following Enum: System.Security.AccessControl.AuditFlags.
 
     .NOTES
     
@@ -43,6 +58,9 @@ function Set-AuditRule
     - https://social.technet.microsoft.com/Forums/ie/en-US/b012f66e-08d1-46d2-b659-6ee004e721c0/powershell-to-set-sacl-on-files?forum=ITCG
     - http://giuoco.org/security/configure-file-and-registry-auditing-with-powershell/
     - https://medium.com/@cryps1s/detecting-windows-endpoint-compromise-with-sacls-cd748e10950
+    - https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced_parameters?view=powershell-7.1#argumentcompleter-attribute
+    - https://docs.microsoft.com/en-us/dotnet/api/system.security.principal.wellknownsidtype?view=net-5.0
+    - https://docs.microsoft.com/en-us/windows/win32/secauthz/sid-strings
 
     .EXAMPLE
 
@@ -57,7 +75,7 @@ function Set-AuditRule
     Audit  :
     Sddl   : O:BAG:...
     
-    PS > Set-AuditRule -RegistryPath HKLM:\SYSTEM\CurrentControlSet\Services\Sysmondrv\Parameters\ -IdentityReference Everyone -Rights ReadKey,QueryValues -InheritanceFlags None -PropagationFlags None -AuditFlags Success
+    PS > Set-AuditRule -RegistryPath HKLM:\SYSTEM\CurrentControlSet\Services\Sysmondrv\Parameters\ -WellKnownSidType WorldSid -Rights ReadKey,QueryValues -InheritanceFlags None -PropagationFlags None -AuditFlags Success
     
     PS > Get-Acl -Path HKLM:\SYSTEM\CurrentControlSet\Services\Sysmondrv\Parameters\ -Audit | fl
 
@@ -84,7 +102,7 @@ function Set-AuditRule
     Audit  : 
     Sddl   : O:S-1-5...
 
-    PS > Set-AuditRule -FilePath C:\tools\test4.txt.txt -IdentityReference Everyone -Rights Read,Modify -InheritanceFlags None -PropagationFlags None -AuditFlags Success
+    PS > Set-AuditRule -FilePath C:\tools\test4.txt.txt -WellKnownSidType WorldSid -Rights Read,Modify -InheritanceFlags None -PropagationFlags None -AuditFlags Success
 
     PS > Get-Acl -Path C:\tools\test.txt -Audit | fl
 
@@ -103,7 +121,7 @@ function Set-AuditRule
     PS > Enter-PSSession MORDORDC -Credential theshire\pgustavo
     [MORDORDC]: PS > Import-Module activedirectory 
     [MORDORDC]: PS > Get-Acl -Path 'AD:\CN=Domain Admins,CN=Users,DC=theshire,DC=local' -Audit | fl
-    [MORDORDC]: PS > Set-AuditRule -AdObjectPath 'AD:\CN=Domain Admins,CN=Users,DC=theshire,DC=local' -IdentityReference Everyone -Rights GenericRead -InheritanceFlags None -AuditFlags Success
+    [MORDORDC]: PS > Set-AuditRule -AdObjectPath 'AD:\CN=Domain Admins,CN=Users,DC=theshire,DC=local' -WellKnownSidType WorldSid -Rights GenericRead -InheritanceFlags None -AuditFlags Success
     [MORDORDC]: PS > Get-Acl -Path 'AD:\CN=Domain Admins,CN=Users,DC=theshire,DC=local' -Audit | fl
 
     #>

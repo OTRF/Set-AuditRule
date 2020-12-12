@@ -12,7 +12,7 @@ rule:
     registry_paths:
         - 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam'
         - 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone'
-    identity_reference: Everyone
+    well_known_sid_type: WorldSid
     rights:
         - SetValue
         - WriteKey
