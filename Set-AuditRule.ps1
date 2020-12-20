@@ -171,8 +171,22 @@ function Set-AuditRule
                 'Name' = 'AuditFlags';
                 'Mandatory' = $true;
                 'ValidateSetOptions' = ([System.Security.AccessControl.AuditFlags]).DeclaredMembers | Where-object { $_.IsStatic } | Select-Object -ExpandProperty name
+                },
+                @{
+                'Name' = 'AttributeGUID';
+                'Mandatory' = $false;
                 }
             )
+
+            $DomainSidArray = ("AccountAdministratorSid","AccountGuestSid","AccountKrbtgtSid","AccountDomainAdminsSid","AccountDomainUsersSid","AccountDomainGuestsSid","AccountComputersSid","AccountControllersSid","AccountCertAdminsSid","AccountSchemaAdminsSid","AccountEnterpriseAdminsSid","AccountPolicyAdminsSid","AccountRasAndIasServersSid")
+            if ($DomainSidArray.Contains($WellKnownSidType))
+            {
+                $DomainSidOption = @{
+                    'Name' = 'DomainSid';
+                    'Mandatory' = $true
+                }
+                $ParamOptions = @($DomainSidOption) + $ParamOptions
+            }
         }
         else
         {
@@ -202,16 +216,6 @@ function Set-AuditRule
             )
         }
 
-        $DomainSidArray = ("AccountAdministratorSid","AccountGuestSid","AccountKrbtgtSid","AccountDomainAdminsSid","AccountDomainUsersSid","AccountDomainGuestsSid","AccountComputersSid","AccountControllersSid","AccountCertAdminsSid","AccountSchemaAdminsSid","AccountEnterpriseAdminsSid","AccountPolicyAdminsSid","AccountRasAndIasServersSid")
-        if ($DomainSidArray.Contains($WellKnownSidType))
-        {
-            $DomainSidOption = @{
-                'Name' = 'DomainSid';
-                'Mandatory' = $true
-            }
-            $ParamOptions = @($DomainSidOption) + $ParamOptions
-        }
-
         $RuntimeParamDic = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
         foreach ($Param in $ParamOptions) {
             $RuntimeParam = New-DynamicParam @Param
@@ -238,7 +242,14 @@ function Set-AuditRule
             }
             if ($PSCmdlet.ParameterSetName -eq 'AdObjectAudit')
             {
-                $AuditRuleObject = New-Object System.DirectoryServices.ActiveDirectoryAuditRule($IdentityReference,$Rights,$AuditFlags,[guid]'00000000-0000-0000-0000-000000000000', $InheritanceFlags,[guid]'00000000-0000-0000-0000-000000000000')
+                if ($AttributeGUID)
+                {
+                    $AuditRuleObject = New-Object System.DirectoryServices.ActiveDirectoryAuditRule($IdentityReference,$Rights,$AuditFlags,[guid]$AttributeGUID, $InheritanceFlags,[guid]'00000000-0000-0000-0000-000000000000')
+                }
+                else {
+                    $AuditRuleObject = New-Object System.DirectoryServices.ActiveDirectoryAuditRule($IdentityReference,$Rights,$AuditFlags,[guid]'00000000-0000-0000-0000-000000000000', $InheritanceFlags,[guid]'00000000-0000-0000-0000-000000000000')
+                    
+                }
                 $path = $AdObjectPath
             }
             else

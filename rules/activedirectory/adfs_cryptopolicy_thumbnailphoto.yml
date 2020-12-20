@@ -1,0 +1,21 @@
+title: ADFS CryptoPolicy Thumbnailphoto Attribute
+id: 76E5E58A-F721-4ADE-9312-B5F3EB9B2B3C
+status: experimental
+description: Adversaries might access ADFS sensivite key material (i.e CryptoPolicy). The object attribute `thumbnailphoto` has been used by tools such as ADFSDump.
+references:
+- https://docs.microsoft.com/en-us/windows/win32/adschema/a-thumbnailphoto
+- https://github.com/fireeye/ADFSDump/blob/master/ADFSDump/AD.cs#L11
+- https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-adts/177c0db5-fa12-4c31-b75a-473425ce9cca
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/12/19
+rule_category: adobject
+rule:
+    ad_object_paths:
+        - "CN=CryptoPolicy,CN=ADFS,CN=Microsoft,CN=Program Data"
+    well_known_sid_type: NetworkSid
+    rights:
+        - GenericRead
+    inheritance_flags: None
+    audit_flags:
+        - Success
+    ad_object_attribute: 8d3bca50-1d7e-11d0-a081-00aa006c33ed

@@ -1,0 +1,18 @@
+title: Domain Admins AD Object
+id: 8CC4A669-F2F9-4E11-A832-EFF72D35297A
+status: experimental
+description: Adversaries might access the Domain Admins group ad object directly (i.e. LDAP Query)
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/06/07
+rule_category: adobject
+rule:
+    domain_fqdn: blacksmith.local
+    ad_object_paths:
+        - "AD:\CN=Domain Admins,CN=Users"
+    well_known_sid_type: NetworkSid
+    rights:
+        - GenericRead
+    inheritance_flags: None
+    audit_flags:
+        - Success
