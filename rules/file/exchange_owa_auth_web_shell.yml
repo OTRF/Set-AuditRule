@@ -1,0 +1,19 @@
+title: Exchange HttpProxy OWA Auth Folder Write
+id: 62E130B2-98AB-4108-ACDD-F9A553D28D67
+status: experimental
+description: Adversaries would create files in C:\Program Files\Microsoft\Exchange Server\V15\FrontEnd\HttpProxy\owa\auth\ for remote code execution using exchange vulnerabilities.
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2021/03/15
+rule_category: file
+rule:
+    file_paths:
+        - 'C:\Program Files\Microsoft\Exchange Server\V15\FrontEnd\HttpProxy\owa\auth\'
+    well_known_sid_type: WorldSid
+    rights:
+        - Write
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success
+notes:
