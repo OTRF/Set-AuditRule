@@ -1,7 +1,7 @@
-title: ADFS CryptoPolicy Thumbnailphoto Attribute
+title: ADFS DKM Contact Object
 id: 76E5E58A-F721-4ADE-9312-B5F3EB9B2B3C
 status: experimental
-description: Adversaries might access ADFS sensivite key material (i.e CryptoPolicy). The object attribute `thumbnailphoto` has been used by tools such as ADFSDump.
+description: A threat actor would need to export the DKM master encryption key in order to decrypt AD FS certificates. Stealing the AD FS token signing certificate would allow someone to impersonate a user in a federated environment. Creatinga SACL on the contact object that contains the DKM master encryption key would help to audit any direct access attempt.
 references:
 - https://docs.microsoft.com/en-us/windows/win32/adschema/a-thumbnailphoto
 - https://github.com/fireeye/ADFSDump/blob/master/ADFSDump/AD.cs#L11
@@ -11,11 +11,10 @@ date: 2020/12/19
 rule_category: adobject
 rule:
     ad_object_paths:
-        - "CN=CryptoPolicy,CN=ADFS,CN=Microsoft,CN=Program Data"
-    well_known_sid_type: NetworkSid
+        - "CN=<Contact Object>,CN=<DKM Container>,CN=ADFS,CN=Microsoft,CN=Program Data"
+    well_known_sid_type: WorldkSid
     rights:
         - GenericRead
     inheritance_flags: None
     audit_flags:
         - Success
-    ad_object_attribute: 8d3bca50-1d7e-11d0-a081-00aa006c33ed
