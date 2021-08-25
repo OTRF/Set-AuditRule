@@ -1,4 +1,4 @@
-title: Microsoft Online Monitoring Agent 
+title: Azure AD Connect Health Monitoring Agent 
 id: e6393e38-6c3e-4bce-8696-3d72d37c2ec2
 status: experimental
 description: A threat actor might want to read information about the endpoint Microsoft monitoring agent such as the machine identity.

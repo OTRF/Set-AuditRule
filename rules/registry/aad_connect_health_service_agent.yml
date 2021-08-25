@@ -1,4 +1,4 @@
-title: Azure AD Connect Hybrid Service Agent 
+title: Azure AD Connect Health Service Agent 
 id: b3068822-704a-43a8-8b6f-970148462c8d
 status: experimental
 description: A threat actor might want to read information about the Azure AD connect health service agents such as the service id, service member it, etc.
