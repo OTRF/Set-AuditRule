@@ -1,0 +1,20 @@
+title: Microsoft Online Monitoring Agent 
+id: e6393e38-6c3e-4bce-8696-3d72d37c2ec2
+status: experimental
+description: A threat actor might want to read information about the endpoint Microsoft monitoring agent such as the machine identity.
+references:
+    - https://o365blog.com/post/hybridhealthagent/
+    - https://github.com/Gerenios/AADInternals/blob/master/HybridHealthServices_utils.ps1#L457-L461
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research), MSTIC R&D
+date: 2020/08/25
+rule_category: registry
+rule:
+    registry_paths:
+        - 'HKLM:\SOFTWARE\Microsoft\Microsoft Online\Reporting\MonitoringAgent'
+    well_known_sid_type: BuiltinAdministratorsSid
+    rights:
+        - ReadKey
+    inheritance_flags: None
+    propagation_flags: None
+    audit_flags:
+        - Success
