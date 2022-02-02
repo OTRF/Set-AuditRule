@@ -2,7 +2,6 @@ Invoke-Expression (New-Object Net.WebClient).DownloadString('https://raw.githubu
 
 $AuditRules = @"
 regKey;wellKnownSidType;rights;inheritanceFlags;propagationFlags;auditFlags
-"HKLM:\SYSTEM\CurrentControlSet\Control\Cryptography\Ngc\KeyTransportKey";"WorldSid";"ReadKey";"ContainerInherit";"InheritOnly";"Success"
 "HKLM:\SYSTEM\CurrentControlSet\Control\CloudDomainJoin";"WorldSid";"ReadKey";"ContainerInherit";"InheritOnly";"Success"
 "@
 
