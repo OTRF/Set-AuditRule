@@ -9,7 +9,6 @@ rule_category: registry
 rule:
     registry_paths:
         - 'HKLM:\SYSTEM\CurrentControlSet\Control\CloudDomainJoin'
-        - 'HKLM:\SYSTEM\CurrentControlSet\Control\Cryptography\Ngc\KeyTransportKey'
     well_known_sid_type: WorldSid
     rights:
         - ReadKey
