@@ -1,0 +1,19 @@
+title: Azure AD Joined Endpoints 
+id: 6e44e2bd-71d4-4d04-9755-418958e21a5f
+status: experimental
+description: A threat actor might want to get information about an Azure AD joined endpoint.
+references:
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research), MSTIC R&D
+date: 2022/02/02
+rule_category: registry
+rule:
+    registry_paths:
+        - 'HKLM:\SYSTEM\CurrentControlSet\Control\CloudDomainJoin'
+        - 'HKLM:\SYSTEM\CurrentControlSet\Control\Cryptography\Ngc\KeyTransportKey'
+    well_known_sid_type: WorldSid
+    rights:
+        - ReadKey
+    inheritance_flags: ContainerInherit
+    propagation_flags: InheritOnly
+    audit_flags:
+        - Success
